@@ -20,7 +20,7 @@ class App
     /**
      * Render a standard web page using a specific layout.
      */
-    public function renderPage($data, $status = 200)
+    public function renderPage($data = null, $status = 200)
     {
         $data["stylesheets"] = ["css/style.css"];
 

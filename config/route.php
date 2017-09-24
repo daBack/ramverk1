@@ -3,6 +3,8 @@
  * Routes.
  */
 // require __DIR__ . "/route/pages.php";
+require __DIR__ . "/route/remserver.php";
+require __DIR__ . "/route/database.php";
 require __DIR__ . "/route/internal.php";
 require __DIR__ . "/route/debug.php";
 require __DIR__ . "/route/flat-file-content.php";

@@ -2,13 +2,15 @@
 
 namespace Anax\Navbar;
 
+use \Anax\DI\InjectionAwareInterface;
+use \Anax\DI\InjectionAwareTrait;
+
 /**
  * Navbar to generate HTML för a navbar from a configuration array.
  */
-class Navbar implements \Anax\Common\ConfigureInterface, \Anax\Common\AppInjectableInterface
+class Navbar implements \Anax\Common\ConfigureInterface, InjectionAwareInterface
 {
-     use \Anax\Common\ConfigureTrait, \Anax\Common\AppInjectableTrait;
-
+     use \Anax\Common\ConfigureTrait, InjectionAwareTrait;
     // public function aLoop()
     // {
     //     var_dump($this->config);
@@ -16,9 +18,13 @@ class Navbar implements \Anax\Common\ConfigureInterface, \Anax\Common\AppInjecta
 
     public function getHTML()
     {
-        $navbar = $this->config;
-        foreach ($navbar as $key => $value) {
-            echo "<a class='navA' href=" . $key . ">" . $value . "</a>";
+        $nav = "<nav><ul>";
+        foreach ($this->config["items"] as $items) {
+                $url = $this->di->get("url")->create($items["route"]);
+                $nav .= "<li><a class='navA' href='$url'>$items[text]</a></li>";
         }
+        $nav .= "</ul></nav>";
+
+        echo $nav;
     }
 }
